@@ -1,17 +1,16 @@
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import ilustrationImg from "../assets/images/ilustration.svg";
+import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 import googleIconImg from "../assets/images/google-icon.svg";
 import { Button } from "../components/Button";
 
 import "../styles/auth.scss";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function Home() {
   const history = useHistory();
-  const { user, signWithGoogle } = useContext(AuthContext);
+  const { user, signWithGoogle } = useAuth();
 
   async function handleCreateRoom() {
     if (!user) {
@@ -24,7 +23,7 @@ export function Home() {
     <div id="page-auth">
       <aside>
         <img
-          src={ilustrationImg}
+          src={illustrationImg}
           alt="Ilustração simbolizando perguntas e respostas"
         />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
