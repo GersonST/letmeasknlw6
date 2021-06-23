@@ -5,6 +5,7 @@ import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { useAuth } from "../hooks/useAuth";
+import { database } from "../services/firebase";
 
 import "../styles/room.scss";
 
@@ -33,7 +34,11 @@ export function Room() {
         name: user.name,
         avatar: user.avatar,
       },
+      isHighlighted: false,
+      isAnswered: false,
     };
+
+    await database.ref(`rooms/${roomId}/questions`).push(question);
   }
 
   return (
