@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useParams } from "react-router-dom";
 
 import logoImg from "../assets/images/logo.svg";
@@ -19,7 +19,9 @@ export function Room() {
   const [newQuestion, setNewQuestion] = useState("");
   const roomId = params.id;
 
-  async function handleSendQuestion() {
+  async function handleSendQuestion(event: FormEvent) {
+    event.preventDefault();
+
     if (newQuestion.trim() === "") {
       return;
     }
@@ -56,7 +58,7 @@ export function Room() {
           <span>4 perguntas</span>
         </div>
 
-        <form>
+        <form onSubmit={handleSendQuestion}>
           <textarea
             placeholder="O que você quer perguntar?"
             onChange={(event) => setNewQuestion(event.target.value)}
